@@ -16,7 +16,7 @@ class LabelTag implements TagInterface {
 
         result.append("<label>")
                 .append(labelText)
-                .append(someTag)
+                .append(someTag.render())
                 .append("</label>");
 
         return result.toString();
