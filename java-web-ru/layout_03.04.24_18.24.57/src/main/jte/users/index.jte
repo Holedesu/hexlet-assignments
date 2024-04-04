@@ -1,25 +1,25 @@
 @import exercise.dto.users.UsersPage
-@param UsersPage users
+@param UsersPage page
 
-
-@template.layout.page(content = @`
-
-    <div class="card">
-        <div class="card-header">
-            <h5 class="card-title">Пользователи</h5>
-        </div>
-        <div class="card-body">
-        <ul class="list-group">
-            <li class="list-group-item">
-                <a href="/users">${users.getUsers().size()}</a>--%>
-<%--                @for(var userInfo : users.getUsers())--%>
-<%--                    @if(userInfo != null)--%>
-<%--                        <a href="/users/${userInfo.getId()}">${userInfo.getFirstName()} ${userInfo.getLastName()}</a>--%>
-<%--                    @endif--%>
-<%--                @endfor--%>
-            </li>
-        </ul>
-        </div>
-    </div>`)
+@template.layout.page(
+content = @`
+    <h1>Пользователи</h1>
+    <table class="table table-striped">
+        @for(var user : page.getUsers())
+            <tr>
+                <td>
+                    ${user.getId()}
+                </td>
+                <td>
+                    <a href="/users/${user.getId()}">${user.getFirstName()} ${user.getLastName()}</a>
+                </td>
+            </tr>
+        @endfor
+    </table>
+`,
+footer = @`
+    <p>Thanks for visiting, come again soon!</p>
+`
+)
 
 

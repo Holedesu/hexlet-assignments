@@ -1,11 +1,8 @@
-@import exercise.dto.users.UsersPage
-<%--@import exercise.dto.users.UserPage--%>
-@import gg.jte.Content
-@import exercise.dto.users.UsersPage
-
-@param UsersPage users
-<%--@param UsersPage users--%>
-
-@template.layout.page(content = @`
-    <h1>Приветствуем, пользователь</h1>
-`)
+@template.layout.page(
+content = @`
+    <h2>Welcome to Hexlet</h2>
+`,
+footer = @`
+    <p>Thanks for visiting, come again soon!</p>
+`
+)

@@ -1,20 +1,13 @@
-@import exercise.dto.users.UsersPage
 @import exercise.dto.users.UserPage
-@import gg.jte.Content
+@param UserPage page
 
-@param UserPage user
+@template.layout.page(
 
-@template.layout.page(content = @`
-    <div class="card">
-        <div class="card-header">
-            <h5 class="card-title">${user.getUser().getFirstName()}</h5>
-        </div>
-        <div class="card-body">
-            <ul class="list-group">
-                <li class="list-group-item">Имя: ${user.getUser().getFirstName()}</li>
-                <li class="list-group-item">Фамилия: ${user.getUser().getLastName()}</li>
-                <li class="list-group-item">Email: ${user.getUser().getEmail()}</li>
-            </ul>
-        </div>
-    </div>
-`)
+content = @`
+    <h2>${page.getUser().getFirstName()} ${page.getUser().getLastName()}</h2>
+    <div>${page.getUser().getEmail()}</div>
+`,
+footer = @`
+    <p>Thanks for visiting, come again soon!</p>
+`
+)
