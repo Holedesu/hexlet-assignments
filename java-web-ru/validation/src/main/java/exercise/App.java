@@ -1,6 +1,7 @@
 package exercise;
 
 import io.javalin.Javalin;
+import io.javalin.http.HttpStatus;
 import io.javalin.validation.ValidationException;
 import java.util.List;
 import exercise.model.Article;
@@ -32,9 +33,8 @@ public final class App {
 
         // BEGIN
         app.post("/articles", ctx -> {
-            var textarea = ctx.formParam("title");
-            var title = ctx.formParam("textarea");
-
+            var title = ctx.formParam("title");
+            var textarea = ctx.formParam("textarea");
             try {
                 var textarea1 = ctx.formParamAsClass("textarea", String.class)
                         .check(value -> value.length() >= 10, "Статья должна быть не короче 10 символов")
@@ -45,29 +45,19 @@ public final class App {
                         .get();
                 var article = new Article(title1, textarea1);
                 ArticleRepository.save(article);
-                ctx.redirect("/articles");
+                ctx.redirect("/articles", HttpStatus.FOUND);
             } catch (ValidationException e) {
                 var page = new BuildArticlePage(title, textarea, e.getErrors());
+                ctx.status(422);
                 ctx.render("articles/build.jte", model("page", page));
             }
         });
 
         app.get("/articles/build", ctx -> {
-            ctx.render("articles/build.jte");
+            var page = new BuildArticlePage();
+            ctx.render("articles/build.jte", model("page", page));
         });
 
-//        app.post("/articles", ctx -> {
-//            var title = ctx.formParam("title");
-//            var text = ctx.formParam("textarea");
-//            try {
-//                var article = new Article(title, text);
-//                ArticleRepository.save(article);
-//                ctx.redirect("/articles");
-//            } catch (ValidationException e) {
-//                var page = new BuildArticlePage(title, text, e.getErrors());
-//                ctx.render("articles/build.jte", model("page", page));
-//            }
-//        });
         // END
 
         return app;
