@@ -3,15 +3,15 @@
 
 @template.layout.page(
     content = @`
-<%--    @if(page.getErrors().size() > 0)--%>
-<%--        <ul>--%>
-<%--            @for(var validator : page.getErrors().values())--%>
-<%--                @for(var error : validator)--%>
-<%--                    <li>${error.getMessage()}</li>--%>
+<%--        @if(page.getErrors() != null)--%>
+<%--            <ul>--%>
+<%--                @for(var validator : page.getErrors().values())--%>
+<%--                    @for(var error : validator)--%>
+<%--                        <li>${error.getMessage()}</li>--%>
+<%--                    @endfor--%>
 <%--                @endfor--%>
-<%--            @endfor--%>
-<%--        </ul>--%>
-<%--    @endif--%>
+<%--            </ul>--%>
+<%--        @endif--%>
         <form action="/articles" method="post">
             <div>
                 <label>
