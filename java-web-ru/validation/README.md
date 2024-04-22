@@ -6,7 +6,7 @@
 * [Подключение стилей Bootstrap](https://getbootstrap.com/docs/5.1/getting-started/introduction/#css)
 * Тег [textarea](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/textarea), который создает в форме многострочное текстовое поле
 
-### src/main/java/exercise/App.java +-
+### src/main/java/exercise/App.java
 
 Реализуйте создание статьи, в которое входит:
 
@@ -27,11 +27,11 @@
 * *Статья должна быть не короче 10 символов*
 * *Статья с таким названием уже существует*
 
-### src/main/java/exercise/dto/articles/BuildArticlePage.java +
+### src/main/java/exercise/dto/articles/BuildArticlePage.java
 
 Реализуйте дата-класс для передачи данных статьи в шаблон.
 
-### src/main/jte/articles/build.jte +
+### src/main/jte/articles/build.jte
 
 Реализуйте шаблон для формы создания новой статьи. Поля формы должны иметь имя *title* для названия статьи и *content* для содержимого
 

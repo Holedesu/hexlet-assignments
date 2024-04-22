@@ -1,7 +1,6 @@
 package exercise;
 
 import io.javalin.Javalin;
-import io.javalin.http.HttpStatus;
 import io.javalin.validation.ValidationException;
 import java.util.List;
 import exercise.model.Article;
@@ -21,9 +20,7 @@ public final class App {
             config.fileRenderer(new JavalinJte());
         });
 
-        app.get("/", ctx -> {
-            ctx.render("index.jte");
-        });
+        app.get("/", ctx -> ctx.render("index.jte"));
 
         app.get("/articles", ctx -> {
             List<Article> articles = ArticleRepository.getEntities();
@@ -32,32 +29,31 @@ public final class App {
         });
 
         // BEGIN
-        app.post("/articles", ctx -> {
-            var title = ctx.formParam("title");
-            var textarea = ctx.formParam("textarea");
-            try {
-                var textarea1 = ctx.formParamAsClass("textarea", String.class)
-                        .check(value -> value.length() >= 10, "Статья должна быть не короче 10 символов")
-                        .get();
-                var title1 = ctx.formParamAsClass("title", String.class)
-                        .check(value -> value.length() >= 2, "Длина тайтла должна быть больше двух символов")
-                        .check(value -> !ArticleRepository.existsByTitle(value), "Статья с таким названием уже существует")
-                        .get();
-                var article = new Article(title1, textarea1);
-                ArticleRepository.save(article);
-                ctx.redirect("/articles", HttpStatus.FOUND);
-            } catch (ValidationException e) {
-                var page = new BuildArticlePage(title, textarea, e.getErrors());
-                ctx.status(422);
-                ctx.render("articles/build.jte", model("page", page));
-            }
-        });
-
         app.get("/articles/build", ctx -> {
             var page = new BuildArticlePage();
             ctx.render("articles/build.jte", model("page", page));
         });
 
+        app.post("/articles", ctx -> {
+            var title = ctx.formParam("title");
+            var content = ctx.formParam("content");
+            try {
+                ctx.formParamAsClass("content", String.class)
+                        .check(value -> value.length() >= 10, "Статья должна быть не короче 10 символов")
+                        .get();
+                ctx.formParamAsClass("title", String.class)
+                        .check(value -> value.length() >= 2, "Название не должно быть короче двух символов")
+                        .check(value -> !ArticleRepository.existsByTitle(value),
+                                "Статья с таким названием уже существует")
+                        .get();
+//                ArticleRepository.save(new Article(titleCheck, contentCheck));
+                ArticleRepository.save(new Article(title, content));
+                ctx.status(302).redirect("/articles");
+            } catch (ValidationException e) {
+                var page = new BuildArticlePage(title, content, e.getErrors());
+                ctx.status(422).render("articles/build.jte", model("page", page));
+            }
+        });
         // END
 
         return app;

@@ -19,17 +19,15 @@
                 <label>
                     Title
                     <input type="text" required name="title" value="${page.getTitle()}"/>
-
                 </label>
             </div>
             <div>
                 <label>
                     Text Area
-                    <textarea required name="textarea">${page.getTextArea()}</textarea>
+                    <textarea required name="content">${page.getTextArea()}</textarea>
                 </label>
             </div>
             <input type="submit" value="Зарегистрировать" />
-
         </form>
-        )
-    `)
+    )
+`)
