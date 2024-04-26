@@ -34,7 +34,7 @@ public class PostsController {
         try {
             var post = PostRepository.find(id).get();
             var page = new PostPage(post);
-            ctx.render(NamedRoutes.postsPath() + "/"+ "show.jte", model("page", page));
+            ctx.render(NamedRoutes.postsPath() + "/" + "show.jte", model("page", page));
         } catch (Exception e) {
             throw new NotFoundResponse();
         }
