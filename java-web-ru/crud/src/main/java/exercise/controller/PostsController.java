@@ -1,13 +1,10 @@
 package exercise.controller;
 
 import static io.javalin.rendering.template.TemplateUtil.model;
-import java.util.List;
-import java.util.ArrayList;
 import java.util.stream.Collectors;
 
 import exercise.dto.posts.PostsPage;
 import exercise.dto.posts.PostPage;
-import exercise.model.Post;
 import exercise.repository.PostRepository;
 
 import exercise.util.NamedRoutes;
