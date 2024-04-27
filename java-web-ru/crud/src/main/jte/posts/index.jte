@@ -13,7 +13,7 @@
                     <li class="member-list"><a href="${NamedRoutes.postPath(post.getId())}">${post.getName()}</a></li>
                 @endfor
 
-<%--                <p>current page: ${}</p>--%>
+                <%--                <p>current page: ${}</p>--%>
                 @if(page.getCurrentPage() + 1 < 8)
                     <p><a href="?page=${page.getCurrentPage() + 1}">next page</a></p>
                 @endif
@@ -21,10 +21,7 @@
                 @if(page.getCurrentPage() -1 > 0)
                     <p><a href="?page=${page.getCurrentPage() - 1}">previous page</a></p>
                 @endif
-
-
-                    </ul>
-
+            </ul>
         </div>
     `
-) 
+)

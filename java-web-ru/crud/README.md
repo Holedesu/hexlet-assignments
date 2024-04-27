@@ -25,7 +25,7 @@
 
 То, какая сейчас страница открыта, определяется параметром строки запроса `page`. По умолчанию загружается первая страница.
 
-### src/main/java/exercise/dto/posts/PostsPage.java +
+### src/main/java/exercise/dto/posts/PostsPage.java
 
 Реализуйте дата-класс для передачи списка статей в шаблон.
 
